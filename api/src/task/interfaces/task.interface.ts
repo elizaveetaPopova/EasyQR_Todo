@@ -3,11 +3,10 @@ import { Document } from 'mongoose';
 export interface ITask extends Document {
   readonly title: string;
   readonly description: string;
-  readonly status: boolean;
+  readonly status: ITaskStatus;
 }
 
-export interface IUpdatedTask extends Document {
-  readonly title?: string;
-  readonly description?: string;
-  readonly status?: boolean;
-}
+export type ITaskStatus =
+  | { status: 0; message: 'not comleted' }
+  | { status: 1; message: 'in progress' }
+  | { status: 2; message: 'comleted' };
