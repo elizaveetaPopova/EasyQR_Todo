@@ -3,3 +3,10 @@ export class CreateTaskDto {
   readonly description: string;
   readonly status: boolean;
 }
+
+export class UpdateTaskDto {
+  _id?: string;
+  title?: string;
+  description?: string;
+  status?: boolean;
+}
