@@ -5,9 +5,9 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  padding: ${({ theme }) => theme.horizontalPadding};
-  width: 100%;
+  width: 540px;
   display: flex;
+  flex-direction: column;
 `;
 
 export const Box = ({ children }: Props) => {
