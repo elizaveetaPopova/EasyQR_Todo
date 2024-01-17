@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 import { ITaskResponse } from '../../services/tasks/types';
+import { useToggleTaskMutation } from '../../services/tasks';
 
 import ListFooter from './ListFooter';
 import ListItem from './ListItem';
@@ -16,10 +17,23 @@ const Wrapper = styled.div`
 `;
 
 export const List = ({ data }: Props) => {
+  const [toggleTask] = useToggleTaskMutation();
+
+  const handleOnCheck = async (task: ITaskResponse) => {
+    await toggleTask({ id: task._id, status: !task.status });
+  };
+
   return (
     <Wrapper>
-      {data?.map((task) => {
-        return <ListItem label={task.title} isChecked={task.status} />;
+      {data?.map((task, index) => {
+        return (
+          <ListItem
+            key={index}
+            onChange={() => handleOnCheck(task)}
+            label={task.title}
+            isChecked={task.status}
+          />
+        );
       })}
       <ListFooter />
     </Wrapper>

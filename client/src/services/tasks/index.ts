@@ -14,13 +14,24 @@ export const tasksApi = createApi({
           ? [
               ...result.map((task) => ({
                 type: 'Tasks' as const,
-                id: task.id,
+                id: task._id,
               })),
               { type: 'Tasks', id: 'LIST' },
             ]
           : [{ type: 'Tasks', id: 'LIST' }],
     }),
+    toggleTask: builder.mutation<
+      ITaskResponse,
+      { id: string; status: boolean }
+    >({
+      query: ({ id, status }) => ({
+        url: `http://localhost:3002/task/${id}`,
+        method: 'PATCH',
+        body: { status },
+      }),
+      invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
+    }),
   }),
 });
 
-export const { useGetTasksQuery } = tasksApi;
+export const { useGetTasksQuery, useToggleTaskMutation } = tasksApi;

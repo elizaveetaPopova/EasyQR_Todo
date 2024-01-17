@@ -1,5 +1,10 @@
 import { styled } from 'styled-components';
 
+interface Props {
+  onChange: () => void;
+  isChecked: boolean;
+}
+
 const Wrapper = styled.div`
   height: 24px;
   width: 24px;
@@ -34,10 +39,10 @@ const StyledCheckbox = styled.div`
   background-repeat: no-repeat;
 `;
 
-const Checkbox = () => {
+const Checkbox = ({ onChange, isChecked }: Props) => {
   return (
     <Wrapper>
-      <CheckboxInput type="checkbox" checked={true} />
+      <CheckboxInput onChange={onChange} type="checkbox" checked={isChecked} />
       <StyledCheckbox className="checkbox" />
     </Wrapper>
   );

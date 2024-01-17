@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import { styled } from 'styled-components';
 
 type Props = {
-  children: string | JSX.Element | JSX.Element[];
+  children: ReactNode;
 };
 
 const Wrapper = styled.div`

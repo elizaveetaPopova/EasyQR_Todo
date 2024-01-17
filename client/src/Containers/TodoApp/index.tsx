@@ -39,9 +39,6 @@ const Logo = styled.p`
 const TodoApp = () => {
   const [theme, setTheme] = useState('light');
   const { data, error, isLoading } = useGetTasksQuery();
-
-  console.log('data :>> ', data);
-
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <Wrapper>
@@ -54,8 +51,9 @@ const TodoApp = () => {
               }
             />
           </Header>
-          {data && <List data={data} />}
           {isLoading && <CircleLoader color="#3710BD" />}
+          {data && <List data={data} />}
+          {error && <h1>Error receiving data</h1>}
         </Box>
       </Wrapper>
     </ThemeProvider>
