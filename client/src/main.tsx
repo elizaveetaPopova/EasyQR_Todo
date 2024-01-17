@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import TodoApp from './Containers/TodoApp/index.tsx';
+import TodoApp from './containers/TodoApp/index.tsx';
 import { store } from './store';
 import './index.css';
 

@@ -1,7 +1,10 @@
 import { styled } from 'styled-components';
 
 import { ITaskResponse } from '../../services/tasks/types';
-import { useToggleTaskMutation } from '../../services/tasks';
+import {
+  useDeleteTaskMutation,
+  useToggleTaskMutation,
+} from '../../services/tasks';
 
 import ListFooter from './ListFooter';
 import ListItem from './ListItem';
@@ -18,9 +21,14 @@ const Wrapper = styled.div`
 
 export const List = ({ data }: Props) => {
   const [toggleTask] = useToggleTaskMutation();
+  const [deleteTask] = useDeleteTaskMutation();
 
   const handleOnCheck = async (task: ITaskResponse) => {
     await toggleTask({ id: task._id, status: !task.status });
+  };
+
+  const removeTask = async (taskId: string) => {
+    await deleteTask({ id: taskId });
   };
 
   return (
@@ -32,6 +40,7 @@ export const List = ({ data }: Props) => {
             onChange={() => handleOnCheck(task)}
             label={task.title}
             isChecked={task.status}
+            onDelete={() => removeTask(task._id)}
           />
         );
       })}

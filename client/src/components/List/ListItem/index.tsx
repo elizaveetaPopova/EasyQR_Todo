@@ -4,6 +4,7 @@ import Checkbox from '../../Checkbox';
 
 interface Props {
   onChange: () => void;
+  onDelete: () => void;
   label: string;
   isChecked: boolean;
 }
@@ -43,7 +44,7 @@ const RemoveBtn = styled.button`
   background-color: transparent;
 `;
 
-const ListItem = ({ onChange, label, isChecked }: Props) => {
+const ListItem = ({ onChange, label, isChecked, onDelete }: Props) => {
   return (
     <Wrapper>
       <ListItemContainer>
@@ -51,7 +52,7 @@ const ListItem = ({ onChange, label, isChecked }: Props) => {
           <Checkbox isChecked={isChecked} onChange={onChange} />
           <span>{label}</span>
         </Label>
-        <RemoveBtn />
+        <RemoveBtn onClick={onDelete} />
       </ListItemContainer>
     </Wrapper>
   );
