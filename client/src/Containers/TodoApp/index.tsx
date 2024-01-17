@@ -1,5 +1,6 @@
 import { ThemeProvider, styled } from 'styled-components';
 import { useState } from 'react';
+import { CircleLoader } from 'react-spinners';
 
 import { useGetTasksQuery } from '../../services/tasks';
 import { lightTheme, darkTheme } from '../../styles/theme';
@@ -53,11 +54,8 @@ const TodoApp = () => {
               }
             />
           </Header>
-          <List></List>
-          {/* <Input value={title} onChange={(e) => setTitle(e.target.value)} />
-
-        {isLoading && <GridLoader color="#36d7b7" />}
-        {data && <Table />} */}
+          {data && <List data={data} />}
+          {isLoading && <CircleLoader color="#3710BD" />}
         </Box>
       </Wrapper>
     </ThemeProvider>

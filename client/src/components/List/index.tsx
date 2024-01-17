@@ -1,8 +1,13 @@
 import { styled } from 'styled-components';
 
-import ListFooter from './ListFooter';
+import { ITaskResponse } from '../../services/tasks/types';
 
-interface Props {}
+import ListFooter from './ListFooter';
+import ListItem from './ListItem';
+
+interface Props {
+  data: ITaskResponse[] | undefined;
+}
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,9 +15,12 @@ const Wrapper = styled.div`
   border-radius: 5px;
 `;
 
-export const List = () => {
+export const List = ({ data }: Props) => {
   return (
     <Wrapper>
+      {data?.map((task) => {
+        return <ListItem label={task.title} isChecked={task.status} />;
+      })}
       <ListFooter />
     </Wrapper>
   );
