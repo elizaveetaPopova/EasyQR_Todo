@@ -5,6 +5,7 @@ import Checkbox from '../../Checkbox';
 interface Props {
   onChange: () => void;
   onDelete: () => void;
+  id: string;
   label: string;
   isChecked: boolean;
 }
@@ -23,19 +24,6 @@ const ListItemContainer = styled.div`
   align-items: center;
 `;
 
-const Label = styled.label<{ checked?: boolean }>`
-  display: flex;
-  flex-direction: row;
-  color: ${({ checked, theme }) =>
-    checked ? theme.strikethrough : theme.text};
-  height: 24px;
-  span {
-    margin-left: 24px;
-    text-decoration: ${(props) => (props.checked ? 'line-through' : 'none')};
-    text-decoration-color: ${({ theme }) => theme.strikethrough};
-  }
-`;
-
 const RemoveBtn = styled.button`
   background-image: ${({ theme }) => `url(${theme.closeIcon})`};
   width: 18px;
@@ -44,14 +32,17 @@ const RemoveBtn = styled.button`
   background-color: transparent;
 `;
 
-const ListItem = ({ onChange, label, isChecked, onDelete }: Props) => {
+const ListItem = ({ onChange, label, isChecked, onDelete, id }: Props) => {
   return (
     <Wrapper>
       <ListItemContainer>
-        <Label checked={isChecked}>
-          <Checkbox isChecked={isChecked} onChange={onChange} />
-          <span>{label}</span>
-        </Label>
+        <Checkbox
+          id={id}
+          isChecked={isChecked}
+          onChange={onChange}
+          label={label}
+        />
+
         <RemoveBtn onClick={onDelete} />
       </ListItemContainer>
     </Wrapper>

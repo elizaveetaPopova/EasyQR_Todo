@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.bgList};
   border-radius: 5px;
+  margin-top: ${({ theme }) => theme.defaultIndentation};
 `;
 
 export const List = ({ data }: Props) => {
@@ -36,6 +37,7 @@ export const List = ({ data }: Props) => {
       {data?.map((task, index) => {
         return (
           <ListItem
+            id={task._id}
             key={index}
             onChange={() => handleOnCheck(task)}
             label={task.title}

@@ -12,7 +12,7 @@ const SortButton = styled.button`
   font-family: 'Josefin Sans';
   height: 100%;
   font-weight: 600;
-  color: ${({ theme }) => theme.footerText};
+  color: ${({ theme }) => theme.secondaryText};
 
   &&:focus {
     color: ${({ theme }) => theme.focuseFooterText};

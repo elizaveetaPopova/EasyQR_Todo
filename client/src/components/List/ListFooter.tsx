@@ -12,12 +12,12 @@ const Wrapper = styled.div`
 `;
 
 const LeftItems = styled.p`
-  color: ${({ theme }) => theme.footerText};
+  color: ${({ theme }) => theme.secondaryText};
   font-size: 14px;
 `;
 
 const CleaningButton = styled.button`
-  color: ${({ theme }) => theme.footerText};
+  color: ${({ theme }) => theme.secondaryText};
   background-color: transparent;
   border: none;
   font-size: 14px;
