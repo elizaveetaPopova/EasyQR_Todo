@@ -7,6 +7,7 @@ interface Props {
   taskTitle: string;
   name: string;
   handleTaskTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   isTaskChecked: boolean;
   handleTaskCheck: () => void;
 }
@@ -25,6 +26,7 @@ const TaskCreator = ({
   handleTaskTitle,
   isTaskChecked,
   handleTaskCheck,
+  onKeyDown,
   name,
 }: Props) => {
   return (
@@ -34,7 +36,12 @@ const TaskCreator = ({
         onChange={handleTaskCheck}
         isChecked={isTaskChecked}
       />
-      <Input title={taskTitle} onChange={handleTaskTitle} />
+      <Input
+        styles={{ marginLeft: '48px' }}
+        title={taskTitle}
+        onKeyDown={onKeyDown}
+        onChange={handleTaskTitle}
+      />
     </Wrapper>
   );
 };

@@ -20,6 +20,12 @@ const Wrapper = styled.div`
   margin-top: ${({ theme }) => theme.defaultIndentation};
 `;
 
+const ListWrapper = styled.div`
+  width: 100%;
+  height: 340px;
+  overflow-y: scroll;
+`;
+
 export const List = ({ data }: Props) => {
   const [toggleTask] = useToggleTaskMutation();
   const [deleteTask] = useDeleteTaskMutation();
@@ -34,18 +40,20 @@ export const List = ({ data }: Props) => {
 
   return (
     <Wrapper>
-      {data?.map((task, index) => {
-        return (
-          <ListItem
-            id={task._id}
-            key={index}
-            onChange={() => handleOnCheck(task)}
-            label={task.title}
-            isChecked={task.status}
-            onDelete={() => removeTask(task._id)}
-          />
-        );
-      })}
+      <ListWrapper>
+        {data?.map((task, index) => {
+          return (
+            <ListItem
+              id={task._id}
+              key={index}
+              onChange={() => handleOnCheck(task)}
+              label={task.title}
+              isChecked={task.status}
+              onDelete={() => removeTask(task._id)}
+            />
+          );
+        })}
+      </ListWrapper>
       <ListFooter />
     </Wrapper>
   );

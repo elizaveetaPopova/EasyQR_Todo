@@ -2,7 +2,7 @@ import { ThemeProvider, styled } from 'styled-components';
 import React, { useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 
-import { useGetTasksQuery } from '../../services/tasks';
+import { useCreateTaskMutation, useGetTasksQuery } from '../../services/tasks';
 import { lightTheme, darkTheme } from '../../styles/theme';
 import ThemeToggle from '../../components/ThemeToggle';
 import { Box } from '../../components/Box';
@@ -45,6 +45,7 @@ const TodoApp = () => {
   });
 
   const { data, error, isLoading } = useGetTasksQuery();
+  const [createTask] = useCreateTaskMutation();
 
   const handleTaskTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTask({
@@ -52,14 +53,21 @@ const TodoApp = () => {
       title: e.target.value,
     });
   };
+
   const handleTaskCheck = () => {
-    console.log('object');
     setTask({
       ...task,
       status: !task.status,
     });
   };
 
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && task.title.length !== 0) {
+      await createTask({ task: task }).then(() => {
+        setTask({ status: false, title: '' });
+      });
+    }
+  };
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <Wrapper>
@@ -78,6 +86,7 @@ const TodoApp = () => {
             isTaskChecked={task.status}
             handleTaskCheck={handleTaskCheck}
             name={'title'}
+            onKeyDown={handleKeyDown}
           />
           {isLoading && <CircleLoader color="#3710BD" />}
           {data && <List data={data} />}

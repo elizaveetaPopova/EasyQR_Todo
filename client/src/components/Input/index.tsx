@@ -3,6 +3,8 @@ import { styled } from 'styled-components';
 interface Props {
   title: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  styles: React.CSSProperties;
 }
 
 const StyledInput = styled.input`
@@ -17,13 +19,15 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
-const Input = ({ title, onChange }: Props) => {
+const Input = ({ title, onChange, onKeyDown, styles }: Props) => {
   return (
     <StyledInput
+      style={styles}
       type="text"
       value={title}
       onChange={onChange}
       placeholder="Create a new todo…"
+      onKeyDown={onKeyDown}
     />
   );
 };

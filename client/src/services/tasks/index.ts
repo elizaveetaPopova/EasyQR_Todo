@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { ITaskResponse } from './types';
+import { ITaskRequest, ITaskResponse } from './types';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
@@ -38,6 +38,14 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: [{ type: 'Tasks' }],
     }),
+    createTask: builder.mutation<ITaskResponse, { task: ITaskRequest }>({
+      query: ({ task }) => ({
+        url: 'http://localhost:3002/task/create',
+        method: 'POST',
+        body: task,
+      }),
+      invalidatesTags: [{ type: 'Tasks' }],
+    }),
   }),
 });
 
@@ -45,4 +53,5 @@ export const {
   useGetTasksQuery,
   useToggleTaskMutation,
   useDeleteTaskMutation,
+  useCreateTaskMutation,
 } = tasksApi;
